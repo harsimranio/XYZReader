@@ -25,7 +25,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -53,7 +52,7 @@ public class ArticleDetailFragment extends Fragment implements
     private View mRootView;
     private int mMutedColor = 0xFF333333;
 
-    private ImageView mPhotoView;
+    private DynamicHeightNetworkImageView mPhotoView;
     private Toolbar toolbar;
     private CollapsingToolbarLayout collapsingToolbarLayout;
 
@@ -109,7 +108,7 @@ public class ArticleDetailFragment extends Fragment implements
                              Bundle savedInstanceState) {
         mRootView = inflater.inflate(R.layout.fragment_article_detail, container, false);
 
-        mPhotoView = (ImageView) mRootView.findViewById(R.id.photo);
+        mPhotoView = (DynamicHeightNetworkImageView) mRootView.findViewById(R.id.photo);
 
         mRootView.findViewById(R.id.share_fab).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -245,6 +244,12 @@ public class ArticleDetailFragment extends Fragment implements
         }
         bylineTextView.setText(byline);
         bodyTextView.setText(body);
+
+        if (getResources().getBoolean(R.bool.small_screen)) {
+            mPhotoView.setAspectRatio(1f / 1.2f);
+        } else {
+            mPhotoView.setAspectRatio(2f);
+        }
 
         Picasso.with(getActivity())
                 .load(cursor.getString(ArticleLoader.Query.PHOTO_URL))

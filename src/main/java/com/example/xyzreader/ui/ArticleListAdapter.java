@@ -18,12 +18,12 @@ import com.example.xyzreader.data.ArticleLoader;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
-public class ArticleListAdapter extends RecyclerView.Adapter<ArticleListAdapter.ViewHolder> {
+class ArticleListAdapter extends RecyclerView.Adapter<ArticleListAdapter.ViewHolder> {
     private Cursor mCursor;
     private Context context;
     private OnItemClickListener itemClickListener;
 
-    public ArticleListAdapter(Context context, Cursor cursor) {
+    ArticleListAdapter(Context context, Cursor cursor) {
         mCursor = cursor;
         this.context = context;
     }
